@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SandBox.Sorting
 {
@@ -27,6 +28,9 @@ namespace SandBox.Sorting
                 case SortType.MergeTimeCost:
                     MergeSort_TimeLeaked(heap);
                     break;
+                case SortType.QuickRecursiveMemoryLeaky:
+                    QuickSortRecursiveMemoryLeaky(heap);
+                    break;
                 default:
                     break;
             }
@@ -34,9 +38,15 @@ namespace SandBox.Sorting
 
         public void StartAndValidate(IList<T> heap, SortType algorithm)
         {
+            Console.WriteLine($"Algorithm: {algorithm}");
+            Console.WriteLine($"Attempt to sort {heap.Count:n0} elements ...");
+            var initialCount = heap.Count;
             Start(heap, algorithm);
             Console.WriteLine($"Collection is sorted: {heap.ValidateSequence().ToString().ToUpper()}");
+            Console.WriteLine($"Nothing missed: {(initialCount == heap.Count).ToString().ToUpper()}");
         }
+
+        #region SimpleSorts
 
         public void BubbleSort(IList<T> heap)
         {
@@ -85,6 +95,8 @@ namespace SandBox.Sorting
                 heap.MoveTo(i, iNew);
             }
         }
+
+        #endregion
 
         #region MergeSort_MemoryLeaked
         /// Implementation relays on creating subarrays during sorting. Those its time efficient (no
@@ -200,6 +212,76 @@ namespace SandBox.Sorting
 
                 if (i1 == i2 && i2 < iStart + width1 + width2 - 1) i2++;
             }
+        }
+
+        #endregion
+
+        #region QuickSortRecursiveMemoryLeaky
+        /// <summary>
+        /// Able to resolve 1 000 000 items sort in around 1-2 minutes
+        /// </summary>
+        /// <param name="heap"></param>
+        public void QuickSortRecursiveMemoryLeaky(IList<T> heap)
+        {
+            var res = QuickSortIteration(CalculateQuickSortStepArguments(heap));
+
+            heap.Clear();
+            foreach (var item in res)
+                heap.Add(item);
+        }
+
+        private Tuple<List<T>, T, List<T>> CalculateQuickSortStepArguments(IList<T> heap)
+        {
+            if(heap.Count == 0) return null;
+            var left = new List<T>();
+            var right = new List<T>();
+
+            for (int i = 0; i < heap.Count / 2; i++)
+                left.Add(heap[i]);
+
+            for (int i = heap.Count / 2 + 1; i < heap.Count; i++)
+                right.Add(heap[i]);
+
+            return new Tuple<List<T>, T, List<T>>(left, heap[heap.Count / 2], right);
+        }
+
+        private List<T> QuickSortIteration(Tuple<List<T>, T, List<T>> args)
+        {
+            if (args == null) return new List<T>();
+            var lHeap = args.Item1;
+            var pivot = args.Item2;
+            var rHeap = args.Item3;
+
+            if(lHeap.Count == 0 && rHeap.Count == 0) return new List<T>{ pivot };
+
+            var result = new List<T>();
+
+            for (int i = 0; i < lHeap.Count; i++)
+            {
+                if (lHeap[i].CompareTo(pivot) > 0)
+                {
+                    //This insertion makes sort unstable.
+                    rHeap.Add(lHeap[i]);
+                    lHeap.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            for (var i = 0;  i < rHeap.Count; i++)
+            {
+                if (rHeap[i].CompareTo(pivot) < 1)
+                {
+                    lHeap.Add(rHeap[i]);
+                    rHeap.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            result.AddRange(QuickSortIteration(CalculateQuickSortStepArguments(lHeap)));
+            result.Add(pivot);
+            result.AddRange(QuickSortIteration(CalculateQuickSortStepArguments(rHeap)));
+
+            return result;
         }
 
         #endregion

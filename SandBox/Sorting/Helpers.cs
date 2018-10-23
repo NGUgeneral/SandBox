@@ -10,11 +10,31 @@ namespace SandBox.Sorting
     {
         public static List<int> GetRandomIntSequence(int min, int max)
         {
+            if (max < min)
+            {
+                var temp = max;
+                max = min;
+                min = temp;
+            }
+            else if (max == min) max++;
+
             var r = new Random();
-            var result = Enumerable.Range(min, max + 1).ToList();
+            var result = Enumerable.Range(min, max - min + 1).ToList();
 
             for(int i = 0; i < result.Count; i++)
                 result.Flip(i, r.Next(i, result.Count));
+
+            return result;
+        }
+
+        public static List<int> GetRandomIntSequenceWithEquals(int min, int max)
+        {
+            var r = new Random();
+            var result = new List<int>();
+            for (int i = 0; i < max; i++)
+            {
+                result.Add(r.Next(min, max));
+            }
 
             return result;
         }
