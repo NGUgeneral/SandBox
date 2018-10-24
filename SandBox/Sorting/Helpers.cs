@@ -20,7 +20,7 @@ namespace SandBox.Sorting
             var result = Enumerable.Range(min, max - min + 1).ToList();
 
             for(int i = 0; i < result.Count; i++)
-                result.Flip(i, r.Next(i, result.Count));
+                result.Swap(i, r.Next(i, result.Count));
 
             return result;
         }
@@ -37,7 +37,7 @@ namespace SandBox.Sorting
             return result;
         }
 
-        public static void Flip<T>(this IList<T> list, int indexA, int indexB)
+        public static void Swap<T>(this IList<T> list, int indexA, int indexB)
         {
             if(indexA.Equals(indexB))return;
 

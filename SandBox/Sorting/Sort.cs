@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace SandBox.Sorting
 {
@@ -30,6 +31,9 @@ namespace SandBox.Sorting
                 case SortType.QuickRecursiveMemoryLeaky:
                     QuickSortRecursiveMemoryLeaky(heap);
                     break;
+                case SortType.HeapTimeCost:
+                    HeapSortTimeLeak(heap);
+                    break;
                 default:
                     break;
             }
@@ -57,7 +61,7 @@ namespace SandBox.Sorting
                 {
                     if (heap[i].CompareTo(heap[i - 1]) < 0)
                     {
-                        heap.Flip(i, i - 1);
+                        heap.Swap(i, i - 1);
                         unordered = true;
                     }
                 }
@@ -76,7 +80,7 @@ namespace SandBox.Sorting
                         iMin = i;
                 }
 
-                heap.Flip(iUnsorted, iMin);
+                heap.Swap(iUnsorted, iMin);
                 iUnsorted++;
             }
         }
@@ -282,6 +286,68 @@ namespace SandBox.Sorting
 
             return result;
         }
+
+        #endregion
+
+        #region HeapSort
+        ///TODO: works but very slow. Diagnostics point to GetParentIndex(i) from CompareParent;
+        public void HeapSortTimeLeak(IList<T> heap)
+        {
+            var unsorted = heap.Count;
+            while (unsorted > 1)
+            {
+                var i = (unsorted - 1) % 2 != 0 ? unsorted - 2 : unsorted - 3;
+                while (i >= 0)
+                {
+                    if (i < unsorted) CompareParent(heap, GetGreaterItemIndex(heap, i, i+1), unsorted);
+                    i -= 2;
+                }
+
+                heap.Swap(0, unsorted - 1);
+                unsorted--;
+            }
+        }
+
+        public static void CompareParent(IList<T> heap, int i, int lim)
+        {
+            var ip = GetParentIndex(i);
+            if (ip < 0) return;
+
+            if (heap[i].CompareTo(heap[ip]) > 0)
+            {
+                heap.Swap(i, ip);
+                var res = CompareChild(heap, i, lim);
+                while (res != null)
+                    res = CompareChild(heap, res.Value, lim);
+            }
+        }
+
+        public static int? CompareChild(IList<T> heap, int ip, int lim)
+        {
+            var ilc = GetLeftChildIndex(ip);
+            if (ilc >= lim) return null;
+            
+            var i = ilc + 1 >= lim ? ilc : GetGreaterItemIndex(heap, ilc, ilc + 1);
+
+            if (heap[i].CompareTo(heap[ip]) > 0)
+            {
+                heap.Swap(i, ip);
+                return i;
+            }
+
+            return null;
+        }
+
+        private static int GetGreaterItemIndex(IList<T> heap, int i1, int i2)
+        {
+            return heap[i1].CompareTo(heap[i2]) > 0 ? i1 : i2;
+        }
+
+        public static int GetParentIndex(int i)
+            => (i + 1)/2 - 1;
+
+        private static int GetLeftChildIndex(int i)
+            => i * 2 + 1;
 
         #endregion
     }

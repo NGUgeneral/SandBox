@@ -17,6 +17,7 @@ namespace SandBox.Sorting
         MergeMemoryCost = 4,
         MergeTimeCost = 5,
         QuickRecursiveMemoryLeaky = 6,
+        HeapTimeCost = 7,
     }
 
 }
