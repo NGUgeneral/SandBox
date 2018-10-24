@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SandBox.Sorting
 {
@@ -67,7 +65,7 @@ namespace SandBox.Sorting
             return true;
         }
 
-        public static void RunWithTimeBenchmark<T, R>(Action<T, R> action, T input1, R input2)
+        public static void RunWithTimeBenchmark<T1, T2>(Action<T1, T2> action, T1 input1, T2 input2)
         {
             var start = DateTime.Now;
 
