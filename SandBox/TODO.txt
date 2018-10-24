@@ -1,0 +1,4 @@
+﻿1. Implement HeapSort;
+2. Implement ShellSort;
+3. Cover existing sorting algorithms with tests;
+4. Implement algorithm for finding the biggest common divider for a set of numbers;
