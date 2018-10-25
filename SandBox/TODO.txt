@@ -1,5 +1,5 @@
-﻿1. Implement HeapSort;
+﻿1. Rewrite sorting implementations to be tasks instead of sync methods;
 2. Implement ShellSort;
-3. Cover existing sorting algorithms with tests;
+3. Cover existing sorting algorithms with tests (use NUnit);
 4. Implement algorithm for finding the biggest common divider for a set of numbers;
 5. Implement cumulative Fibonacci sequence method: build FibSequence, which first time build a given sequence and writes results to an external file. When called next time - deserialez existing sequence, tries find the result there and if can't - extends the library and updates the external file;
