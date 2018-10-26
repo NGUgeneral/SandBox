@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SandBox.Sorting
+namespace SandBox.Algorithms
 {
     public static class Helpers
     {

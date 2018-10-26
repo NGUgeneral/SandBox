@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
-namespace SandBox.Sorting
+namespace SandBox.Algorithms
 {
-    class Sort<T> : ISort<T> where T : IComparable
+    class Sort<T> where T : IComparable
     {
         public void Start(IList<T> heap, SortType algorithm)
         {
@@ -33,8 +32,6 @@ namespace SandBox.Sorting
                     break;
                 case SortType.HeapTimeCost:
                     HeapSortTimeLeak(heap);
-                    break;
-                default:
                     break;
             }
         }
@@ -102,8 +99,8 @@ namespace SandBox.Sorting
         #endregion
 
         #region MergeSort_MemoryLeaked
-        /// Implementation relays on creating subarrays during sorting. Those its time efficient (no
-        /// altering of existing arrays), but memory inefficient (numerous of subarrays are created
+        /// Implementation relays on creating sub-arrays during sorting. Those its time efficient (no
+        /// altering of existing arrays), but memory inefficient (numerous of sub-arrays are created
         /// on each step of the sort).
 
         public void MergeSort_MemoryLeaked(IList<T> heap)

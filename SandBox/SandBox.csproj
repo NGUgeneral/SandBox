@@ -49,13 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Items\AlarmClock.cs" />
+    <Compile Include="Algorithms\Enums.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Node.cs" />
-    <Compile Include="Sorting\Sort.cs" />
-    <Compile Include="Sorting\ISort.cs" />
-    <Compile Include="Sorting\Helpers.cs" />
+    <Compile Include="Algorithms\Sort.cs" />
+    <Compile Include="Algorithms\Helpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
