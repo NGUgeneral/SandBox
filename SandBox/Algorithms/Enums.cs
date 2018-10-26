@@ -10,4 +10,11 @@
         QuickRecursiveMemoryLeaky = 6,
         HeapTimeCost = 7,
     }
+
+    public enum CommonDivisionType
+    {
+        Naive = 1,
+        Euclidean = 2,
+        Factorization,
+    }
 }

@@ -8,18 +8,24 @@ namespace SandBox
     {
         static void Main(string[] args)
         {
-            var sort = new Sort<int>();
+            //var sort = new Sort<int>();
+            var commonDivisor = new CommonDivisor();
 
-            //var sample = new List<int> { 9, 4, 2, 8, 1, 0, 11, 6, 7, 3, 5 };
-            var sample = Helpers.GetRandomIntSequence(1, 50000);
+            //var sample = new List<int> { 12, 16, 24 };
+            var sample = Helpers.GetRandomIntSequence(1, 10000);
             var randomSequence = new List<int>();
 
             randomSequence.AddRange(sample);
 
-            Helpers.RunWithTimeBenchmark(sort.StartAndValidate, randomSequence, SortType.QuickRecursiveMemoryLeaky);
+            Helpers.RunWithTimeBenchmark(commonDivisor.Start, randomSequence, CommonDivisionType.Factorization);
 
-            randomSequence.Clear();
-            randomSequence.AddRange(sample);
+            #region sortingAlgorithms
+
+
+            //Helpers.RunWithTimeBenchmark(sort.StartAndValidate, randomSequence, SortType.QuickRecursiveMemoryLeaky);
+
+            //randomSequence.Clear();
+            //randomSequence.AddRange(sample);
 
             //Helpers.RunWithTimeBenchmark(sort.StartAndValidate, randomSequence, SortType.MergeTimeCost);
 
@@ -47,6 +53,8 @@ namespace SandBox
             //randomSequence.AddRange(sample);
 
             //Helpers.RunWithTimeBenchmark(sort.StartAndValidate, randomSequence, SortType.Bubble);
+
+            #endregion
 
             randomSequence.Clear();
             sample.Clear();
