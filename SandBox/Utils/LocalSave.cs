@@ -3,14 +3,14 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 
-namespace SandBox.Math
+namespace SandBox.Utils
 {
     public abstract class LocalSave<T>
     {
         public T _obj { get; private set; }
         public string _fileName { get; }
 
-        public string GetFullName => _fileName + ".bin";
+        public virtual string GetFullName => _fileName + ".bin";
 
         protected LocalSave(T obj, string fileName)
         {
@@ -18,7 +18,7 @@ namespace SandBox.Math
             _fileName = fileName;
         }
 
-        public async Task Save()
+        public virtual void Save()
         {
             if (File.Exists(GetFullName))
                 File.Delete(GetFullName);
@@ -33,7 +33,7 @@ namespace SandBox.Math
             }
         }
 
-        public void Load()
+        public virtual void Load()
         {
             if (File.Exists(GetFullName))
             {
