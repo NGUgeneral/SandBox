@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Algorithms\CommonDivisor.cs" />
     <Compile Include="Algorithms\Enums.cs" />
+    <Compile Include="Math\Factorization.cs" />
+    <Compile Include="Math\LocalSave.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Node.cs" />
