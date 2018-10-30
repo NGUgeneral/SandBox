@@ -26,6 +26,21 @@ namespace SandBox.Math
             return Primes[i - 1];
         }
 
+        private int GetPrimeBefore(int lim)
+        {
+            var needSave = false;
+
+            while (Primes.Last() < lim)
+            {
+                GetNextPrime();
+                if (!needSave) needSave = true;
+            }
+
+            if (needSave) Save();
+
+            return Primes.LastOrDefault(x => x <= lim);
+        }
+
         private void GetNextPrime()
         {
             var n = Primes.Last() + 1;
@@ -36,5 +51,28 @@ namespace SandBox.Math
 
         private bool IsPrime(int n)
             => Primes.FirstOrDefault(x => n % x == 0) == 0;
+
+        public List<int> Factorize(int n)
+        {
+            var result = new List<int>();
+            if (n < 2 || Primes.Contains(n)) return new List<int>{ n };
+            var i = Primes.IndexOf(GetPrimeBefore(n));
+
+
+            while (n != 1)
+            {
+                if (n % Primes[i] == 0)
+                {
+                    result.Add(Primes[i]);
+                    n /= Primes[i];
+                }
+                else
+                {
+                    i--;
+                }
+            }
+
+            return result;
+        }
     }
 }
