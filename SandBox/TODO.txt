@@ -1,2 +1,3 @@
 ﻿1. Implement ShellSort;
 2. Cover existing sorting algorithms with tests (use NUnit);
+3. Introduce bank entity and introduce Add/Subtract functionality to it (using lock, using Queue, using NotifyChange, using events);
