@@ -54,7 +54,6 @@
     <Compile Include="Math\Factorization.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Node.cs" />
     <Compile Include="Algorithms\Sort.cs" />
     <Compile Include="Utils\Helpers.cs" />
     <Compile Include="Utils\LocalSave.cs" />
