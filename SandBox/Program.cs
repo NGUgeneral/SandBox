@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using SandBox.Algorithms;
 using SandBox.Math;
 
 namespace SandBox
@@ -7,7 +9,6 @@ namespace SandBox
     {
         static void Main(string[] args)
         {
-            
 
             Console.WriteLine("Press any key to exit ...");
             Console.ReadKey();

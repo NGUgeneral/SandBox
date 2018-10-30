@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SandBox.Math;
 
 namespace SandBox.Algorithms
 {
@@ -15,7 +16,7 @@ namespace SandBox.Algorithms
             StartHandler(sequence, algorithm);
         }
 
-        public void StartHandler(IList<int> sequence, CommonDivisionType algorithm)
+        private void StartHandler(IList<int> sequence, CommonDivisionType algorithm)
         {
             if (sequence == null) throw new NullReferenceException("Can't find common divisor for a null sequence");
             var result = 0;
@@ -71,14 +72,37 @@ namespace SandBox.Algorithms
 
         #region Factorization
 
-        //This implementation is about:
-        //1. Factorize each given number of a set (including the number itself).
-        //2. Determine the greatest common element.
-
         private static int Factorization(IList<int> sequence)
         {
-            Console.WriteLine("This algorithm is not implemented yet!");
-            return 0;
+            if (!sequence.Any()) return 0;
+            if (sequence.Count == 1) return sequence.Max();
+
+            var factorService = new Factorization();
+            var factorizedSequence = new List<List<int>>();
+
+            foreach (var number in new HashSet<int>(sequence))
+            {
+                var factor = factorService.Factorize(number);
+                if (factor.Any() && factor[0] > 0) factorizedSequence.Add(factor);
+            }   
+
+            var commonDivisors = IntersectFactors(factorizedSequence[0], factorizedSequence[1]);
+
+            for (int i = 2; i < factorizedSequence.Count; i++)
+                commonDivisors = IntersectFactors(commonDivisors, factorizedSequence[i]);
+
+            return commonDivisors.Any() ? commonDivisors.Aggregate((x, y) => x * y) : 1;
+        }
+
+        private static IEnumerable<int> IntersectFactors(IEnumerable<int> seq1, IEnumerable<int> seq2)
+        {
+            foreach (var prime in seq1.Intersect(seq2).ToArray())
+            {
+                var count = System.Math.Min(seq1.Count(x => x == prime), seq2.Count(x => x == prime));
+
+                for (int i = 0; i < count; i++)
+                    yield return prime;
+            }
         }
 
         #endregion
