@@ -7,7 +7,7 @@ namespace SandBox.Math
 {
     public sealed class Factorization : LocalSave<List<int>>
     {
-        private List<int> Primes => _obj;
+        public List<int> Primes => _obj;
         public Factorization() : base(new List<int> { 2 }, "primes")
         {
             Load();
@@ -21,8 +21,8 @@ namespace SandBox.Math
                 GetNextPrime();
                 if (!needSave) needSave = true;
             }
-
-            if(needSave) Save();
+            
+            if (needSave) Save();
             return Primes[i - 1];
         }
 
@@ -35,7 +35,7 @@ namespace SandBox.Math
                 GetNextPrime();
                 if (!needSave) needSave = true;
             }
-
+            
             if (needSave) Save();
 
             return Primes.LastOrDefault(x => x <= lim);

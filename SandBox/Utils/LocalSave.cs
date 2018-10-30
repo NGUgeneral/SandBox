@@ -2,15 +2,16 @@
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace SandBox.Utils
 {
     public abstract class LocalSave<T>
     {
-        public T _obj { get; private set; }
-        public string _fileName { get; }
+        protected T _obj { get; private set; }
+        protected string _fileName { get; }
 
-        public virtual string GetFullName => _fileName + ".bin";
+        private string FullName => _fileName + ".xml";
 
         protected LocalSave(T obj, string fileName)
         {
@@ -18,34 +19,29 @@ namespace SandBox.Utils
             _fileName = fileName;
         }
 
-        public virtual void Save()
+        protected void Save()
         {
-            if (File.Exists(GetFullName))
-                File.Delete(GetFullName);
+            if (File.Exists(FullName))
+                File.Delete(FullName);
 
-            using (Stream stream = new FileStream(GetFullName,
-                FileMode.Create,
-                FileAccess.Write,
-                FileShare.None))
-            {
-                IFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, _obj);
-            }
+            XmlSerializer writer = new XmlSerializer(typeof(T));
+            FileStream file = File.Create(FullName);
+            writer.Serialize(file, _obj);
+            file.Close();
         }
 
-        public virtual void Load()
+        protected void Load()
         {
-            if (File.Exists(GetFullName))
+            if (!File.Exists(FullName))
             {
-                using (Stream stream = new FileStream(GetFullName,
-                    FileMode.Open,
-                    FileAccess.Read,
-                    FileShare.Read))
-                {
-                    IFormatter formatter = new BinaryFormatter();
-                    _obj = (T)formatter.Deserialize(stream);
-                }
+                System.Console.WriteLine($"Failed to deserialize {FullName}");
+                return;
             }
+
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            StreamReader reader = new StreamReader(FullName);
+            _obj = (T)serializer.Deserialize(reader);
+            reader.Close();
         }
     }
 }
