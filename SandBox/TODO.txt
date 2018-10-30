@@ -1,4 +1,2 @@
-﻿1. Rewrite sorting implementations to be tasks instead of sync methods;
-2. Implement ShellSort;
-3. Cover existing sorting algorithms with tests (use NUnit);
-4. Implement algorithm for finding the biggest common divider for a set of numbers and lowest common miltiple;
+﻿1. Implement ShellSort;
+2. Cover existing sorting algorithms with tests (use NUnit);

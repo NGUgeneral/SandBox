@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using SandBox.Utils;
 
 namespace SandBox.Algorithms
 {
     class Sort<T> where T : IComparable
     {
-        public void Start(IList<T> heap, SortType algorithm)
+        private async void Start(IList<T> heap, SortType algorithm)
         {
             if(heap == null) throw new NullReferenceException("Can't order a null sequence");
             if (heap.Count == 1) return;
@@ -14,25 +15,25 @@ namespace SandBox.Algorithms
             switch(algorithm)
             {
                 case SortType.Bubble:
-                    BubbleSort(heap);
+                    await BubbleSort(heap).ConfigureAwait(true);
                     break;
                 case SortType.Selection:
-                    SelectionSort(heap);
+                    await SelectionSort(heap).ConfigureAwait(true);
                     break;
                 case SortType.Insertion:
-                    InsertionSort(heap);
+                    await InsertionSort(heap).ConfigureAwait(true);
                     break;
                 case SortType.MergeMemoryCost:
-                    MergeSort_MemoryLeaked(heap);
+                    await MergeSort_MemoryLeaked(heap).ConfigureAwait(true);
                     break;
                 case SortType.MergeTimeCost:
-                    MergeSort_TimeLeaked(heap);
+                    await MergeSort_TimeLeaked(heap).ConfigureAwait(true);
                     break;
                 case SortType.QuickRecursiveMemoryLeaky:
-                    QuickSortRecursiveMemoryLeaky(heap);
+                    await QuickSortRecursiveMemoryLeaky(heap).ConfigureAwait(true);
                     break;
                 case SortType.HeapTimeCost:
-                    HeapSortTimeLeak(heap);
+                    await HeapSortTimeLeak(heap).ConfigureAwait(true);
                     break;
             }
         }
@@ -49,7 +50,7 @@ namespace SandBox.Algorithms
 
         #region SimpleSorts
 
-        public void BubbleSort(IList<T> heap)
+        public async Task BubbleSort(IList<T> heap)
         {
             var unordered = true;
             while (unordered)
@@ -66,7 +67,7 @@ namespace SandBox.Algorithms
             }
         }
 
-        public void SelectionSort(IList<T> heap)
+        public async Task SelectionSort(IList<T> heap)
         {
             int iUnsorted = 0;
             while (iUnsorted < heap.Count)
@@ -83,7 +84,7 @@ namespace SandBox.Algorithms
             }
         }
 
-        public void InsertionSort(IList<T> heap)
+        public async Task InsertionSort(IList<T> heap)
         {
             for (int i = 1; i < heap.Count; i++)
             {
@@ -104,7 +105,7 @@ namespace SandBox.Algorithms
         /// altering of existing arrays), but memory inefficient (numerous of sub-arrays are created
         /// on each step of the sort).
 
-        public void MergeSort_MemoryLeaked(IList<T> heap)
+        public async Task MergeSort_MemoryLeaked(IList<T> heap)
         {
             var holder = new List<List<T>>();
             foreach (var item in heap)
@@ -129,7 +130,7 @@ namespace SandBox.Algorithms
             }
         }
 
-        private List<T> MergeLists(List<T> list1, List<T> list2)
+        private static List<T> MergeLists(List<T> list1, List<T> list2)
         {
             var result = new List<T>();
 
@@ -177,7 +178,7 @@ namespace SandBox.Algorithms
         /// inserting and removing items of existing list. Those - it is memory efficient (since no
         /// sub arrays are created) but time inefficient, since inserting into same array is time consuming.
 
-        public static void MergeSort_TimeLeaked(IList<T> heap)
+        public async Task MergeSort_TimeLeaked(IList<T> heap)
         {
             var c = 1;
             while (c < heap.Count)
@@ -222,7 +223,7 @@ namespace SandBox.Algorithms
         /// Able to resolve 1 000 000 items sort in around 1-2 minutes
         /// </summary>
         /// <param name="heap"></param>
-        public void QuickSortRecursiveMemoryLeaky(IList<T> heap)
+        public async Task QuickSortRecursiveMemoryLeaky(IList<T> heap)
         {
             var res = QuickSortIteration(CalculateQuickSortStepArguments(heap));
 
@@ -289,7 +290,7 @@ namespace SandBox.Algorithms
 
         #region HeapSort
         ///TODO: works but very slow. Diagnostics point to GetParentIndex(i) from CompareParent;
-        public void HeapSortTimeLeak(IList<T> heap)
+        public async Task HeapSortTimeLeak(IList<T> heap)
         {
             var unsorted = heap.Count;
             while (unsorted > 1)

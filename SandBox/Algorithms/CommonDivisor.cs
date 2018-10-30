@@ -9,14 +9,14 @@ namespace SandBox.Algorithms
 {
     class CommonDivisor
     {
-        public void Start(IList<int> sequence, CommonDivisionType algorithm)
+        public async void Start(IList<int> sequence, CommonDivisionType algorithm)
         {
             Console.WriteLine($"Algorithm: {algorithm}");
             Console.WriteLine($"Attempt to find greatest common divisor of {sequence.Count:n0} elements ...");
-            StartHandler(sequence, algorithm);
+            await StartHandler(sequence, algorithm).ConfigureAwait(true);
         }
 
-        private void StartHandler(IList<int> sequence, CommonDivisionType algorithm)
+        private async Task StartHandler(IList<int> sequence, CommonDivisionType algorithm)
         {
             if (sequence == null) throw new NullReferenceException("Can't find common divisor for a null sequence");
             var result = 0;
@@ -30,13 +30,13 @@ namespace SandBox.Algorithms
                 switch (algorithm)
                 {
                     case CommonDivisionType.Naive:
-                        result = Naive(sequence);
+                        result = await Naive(sequence).ConfigureAwait(true);
                         break;
                     case CommonDivisionType.Euclidean:
                         result = Euclidean(sequence);
                         break;
                     case CommonDivisionType.Factorization:
-                        result = Factorization(sequence);
+                        result = await Factorization(sequence).ConfigureAwait(true);
                         break;
                 }
             }
@@ -46,7 +46,7 @@ namespace SandBox.Algorithms
 
         #region Naive
 
-        private static int Naive(IList<int> sequence)
+        private async Task<int> Naive(IList<int> sequence)
         {
             int i = sequence.Max() - 1;
             while(i > 0)
@@ -72,7 +72,7 @@ namespace SandBox.Algorithms
 
         #region Factorization
 
-        private static int Factorization(IList<int> sequence)
+        private async Task<int> Factorization(IList<int> sequence)
         {
             if (!sequence.Any()) return 0;
             if (sequence.Count == 1) return sequence.Max();
