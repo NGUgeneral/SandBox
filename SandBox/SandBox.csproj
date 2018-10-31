@@ -55,6 +55,9 @@
     <Compile Include="Algorithms\CommonDivisor.cs" />
     <Compile Include="Algorithms\Enums.cs" />
     <Compile Include="ConsoleService.cs" />
+    <Compile Include="DbEntityMock\Column.cs" />
+    <Compile Include="DbEntityMock\Table.cs" />
+    <Compile Include="DbEntityMock\TableExtensions.cs" />
     <Compile Include="Math\Factorization.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +73,7 @@
   <ItemGroup>
     <Content Include="TODO.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
