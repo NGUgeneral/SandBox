@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using SandBox.Utils;
 
 namespace SandBox.Math
 {
-    public sealed class Factorization : LocalSave<List<int>>
+    public sealed class Factorization : JsonCacheService<List<int>>
     {
         public List<int> Primes => _obj;
         public Factorization() : base(new List<int> { 2 }, "primes")

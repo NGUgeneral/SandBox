@@ -1,3 +1,4 @@
-﻿1. Implement ShellSort;
-2. Cover existing sorting algorithms with tests (use NUnit);
-3. Introduce bank entity and introduce Add/Subtract functionality to it (using lock, using Queue, using NotifyChange, using events);
+﻿1. Introduce interface for LocalSave Services and use them instead of inheriting from superclass (or implement interface to superclss);
+2. Implement ShellSort;
+3. Cover existing sorting algorithms with tests (use NUnit);
+4. Introduce bank entity and introduce Add/Subtract functionality to it (using lock, using Queue, using NotifyChange, using events);

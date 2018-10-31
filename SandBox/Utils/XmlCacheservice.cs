@@ -1,19 +1,16 @@
 ﻿using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace SandBox.Utils
 {
-    public abstract class LocalSave<T>
+    public class XmlCacheService<T>
     {
         protected T _obj { get; private set; }
         protected string _fileName { get; }
 
         private string FullName => _fileName + ".xml";
 
-        protected LocalSave(T obj, string fileName)
+        protected XmlCacheService(T obj, string fileName)
         {
             _obj = obj;
             _fileName = fileName;
@@ -32,11 +29,7 @@ namespace SandBox.Utils
 
         protected void Load()
         {
-            if (!File.Exists(FullName))
-            {
-                System.Console.WriteLine($"Failed to deserialize {FullName}");
-                return;
-            }
+            if (!File.Exists(FullName)) return;
 
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             StreamReader reader = new StreamReader(FullName);
