@@ -55,6 +55,7 @@
     <Compile Include="Algorithms\CommonDivisor.cs" />
     <Compile Include="Algorithms\Enums.cs" />
     <Compile Include="CodewarsKatas\ReplaceWithAlphabetPosition.cs" />
+    <Compile Include="CodewarsKatas\SudokuSolutionValidator.cs" />
     <Compile Include="ConsoleService.cs" />
     <Compile Include="DbEntityMock\Column.cs" />
     <Compile Include="DbEntityMock\Table.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Test\Algorithms\CommonDivisorTest.cs" />
     <Compile Include="Test\Algorithms\SortTest.cs" />
     <Compile Include="Test\CodewarsKatasTests\ReplaceWithAlphabetPositionTest.cs" />
+    <Compile Include="Test\CodewarsKatasTests\SudokuSolutionValidatorTest.cs" />
     <Compile Include="Utils\GenericSaveJson.cs" />
     <Compile Include="Utils\Helpers.cs" />
     <Compile Include="Utils\JsonCacheService.cs" />
