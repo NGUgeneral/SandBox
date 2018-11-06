@@ -8,14 +8,7 @@ namespace SandBox.Algorithms
 {
     class CommonDivisor
     {
-        public async void Start(IList<int> sequence, CommonDivisionType algorithm)
-        {
-            Console.WriteLine($"Algorithm: {algorithm}");
-            Console.WriteLine($"Attempt to find greatest common divisor of {sequence.Count:n0} elements ...");
-            await StartHandler(sequence, algorithm).ConfigureAwait(true);
-        }
-
-        private async Task StartHandler(IList<int> sequence, CommonDivisionType algorithm)
+        public async Task<int> StartAndReturnResult(IList<int> sequence, CommonDivisionType algorithm)
         {
             if (sequence == null) throw new NullReferenceException("Can't find common divisor for a null sequence");
             var result = 0;
@@ -29,18 +22,18 @@ namespace SandBox.Algorithms
                 switch (algorithm)
                 {
                     case CommonDivisionType.Naive:
-                        result = await Naive(sequence).ConfigureAwait(true);
+                        result = await Naive(sequence).ConfigureAwait(false);
                         break;
                     case CommonDivisionType.Euclidean:
                         result = Euclidean(sequence);
                         break;
                     case CommonDivisionType.Factorization:
-                        result = await Factorization(sequence).ConfigureAwait(true);
+                        result = await Factorization(sequence).ConfigureAwait(false);
                         break;
                 }
             }
 
-            Console.WriteLine($"Greatest common divisor for a given sequence is: {result}");
+            return result;
         }
 
         #region Naive
@@ -82,7 +75,7 @@ namespace SandBox.Algorithms
             foreach (var number in new HashSet<int>(sequence))
             {
                 var factor = factorService.Factorize(number);
-                if (factor.Any() && factor[0] > 0) factorizedSequence.Add(factor);
+                if (factor.Any()) factorizedSequence.Add(factor);
             }   
 
             var commonDivisors = IntersectFactors(factorizedSequence[0], factorizedSequence[1]);

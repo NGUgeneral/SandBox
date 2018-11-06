@@ -7,12 +7,12 @@ namespace SandBox.Algorithms
 {
     class Sort<T> where T : IComparable
     {
-        private async void Start(IList<T> heap, SortType algorithm)
+        public async Task<IList<T>> StartAndReturnResult(IList<T> heap, SortType algorithm)
         {
-            if(heap == null) throw new NullReferenceException("Can't order a null sequence");
-            if (heap.Count == 1) return;
+            if (heap == null) throw new NullReferenceException("Can't order a null sequence");
+            if (heap.Count == 1) return heap;
 
-            switch(algorithm)
+            switch (algorithm)
             {
                 case SortType.Bubble:
                     await BubbleSort(heap).ConfigureAwait(true);
@@ -36,16 +36,8 @@ namespace SandBox.Algorithms
                     await HeapSortTimeLeak(heap).ConfigureAwait(true);
                     break;
             }
-        }
 
-        public void StartAndValidate(IList<T> heap, SortType algorithm)
-        {
-            Console.WriteLine($"Algorithm: {algorithm}");
-            Console.WriteLine($"Attempt to sort {heap.Count:n0} elements ...");
-            var initialCount = heap.Count;
-            Start(heap, algorithm);
-            Console.WriteLine($"Collection is sorted: {heap.ValidateSequence().ToString().ToUpper()}");
-            Console.WriteLine($"Nothing missed: {(initialCount == heap.Count).ToString().ToUpper()}");
+            return heap;
         }
 
         #region SimpleSorts
