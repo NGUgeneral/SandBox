@@ -54,8 +54,10 @@
   <ItemGroup>
     <Compile Include="Algorithms\CommonDivisor.cs" />
     <Compile Include="Algorithms\Enums.cs" />
+    <Compile Include="CodewarsKatas\Kyu5\Int32ToIPv4.cs" />
     <Compile Include="CodewarsKatas\Kyu6\ReplaceWithAlphabetPosition.cs" />
     <Compile Include="CodewarsKatas\Kyu4\SudokuSolutionValidator.cs" />
+    <Compile Include="CodewarsKatas\Tests\Kyu5\Int32ToIPv4Test.cs" />
     <Compile Include="ConsoleService.cs" />
     <Compile Include="Math\Factorization.cs" />
     <Compile Include="Program.cs" />
@@ -78,9 +80,7 @@
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CodewarsKatas\Kyu5\" />
     <Folder Include="CodewarsKatas\Kyu7\" />
-    <Folder Include="CodewarsKatas\Tests\Kyu5\" />
     <Folder Include="CodewarsKatas\Tests\Kyu7\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
