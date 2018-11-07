@@ -31,9 +31,10 @@ namespace SandBox.CodewarsKatas.Kyu4
             sequence.AddRange(correctSample);
 
             foreach (var num in board[row])
-                sequence.Remove(num);
+                if(!sequence.Contains(num))
+                    return false;
 
-            return !sequence.Any();
+            return true;
         }
 
         private static bool ValidateColumn(int[][] board, int column)
@@ -47,9 +48,10 @@ namespace SandBox.CodewarsKatas.Kyu4
                 columnSequence.Add(row[column]);
 
             foreach (var num in columnSequence)
-                sequence.Remove(num);
+                if (!sequence.Contains(num))
+                    return false;
 
-            return !sequence.Any();
+            return true;
         }
 
         private static bool ValidateSquare(int[][] board, int row, int column)
@@ -66,9 +68,10 @@ namespace SandBox.CodewarsKatas.Kyu4
             }
 
             foreach (var num in squareSequence)
-                sequence.Remove(num);
+                if (!sequence.Contains(num))
+                    return false;
 
-            return !sequence.Any();
+            return true;
         }
     }
 }
