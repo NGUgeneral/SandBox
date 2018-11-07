@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 //https://www.codewars.com/kata/sudoku-solution-validator/train/csharp
-namespace SandBox.CodewarsKatas
+namespace SandBox.CodewarsKatas.Kyu4
 {
     public class SudokuSolutionValidator
     {

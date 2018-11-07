@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using SandBox.Algorithms;
 using SandBox.Utils;
 
-namespace SandBox.Test.Algorithms.Sort
+namespace SandBox.Algorithms.Tests
 {
     [TestFixture]
     class SortTest

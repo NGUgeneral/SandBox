@@ -1,8 +1,7 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 
-namespace SandBox.CodewarsKatas
+namespace SandBox.CodewarsKatas.Kyu6
 {
     //https://www.codewars.com/kata/replace-with-alphabet-position/train/csharp
     public static class ReplaceWithAlphabetPosition

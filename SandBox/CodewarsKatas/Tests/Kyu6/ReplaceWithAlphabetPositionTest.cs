@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using SandBox.CodewarsKatas;
+using SandBox.CodewarsKatas.Kyu6;
 
-namespace SandBox.Test.CodewarsKatasTests
+namespace SandBox.CodewarsKatas.Tests.Kyu6
 {
     [TestFixture]
     public class ReplaceWithAlphabetPositionTest

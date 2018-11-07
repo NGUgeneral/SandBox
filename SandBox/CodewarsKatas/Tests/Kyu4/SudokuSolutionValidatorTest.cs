@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using SandBox.CodewarsKatas;
+﻿using NUnit.Framework;
+using SandBox.CodewarsKatas.Kyu4;
 
-namespace SandBox.Test.CodewarsKatasTests
+namespace SandBox.CodewarsKatas.Tests.Kyu4
 {
     [TestFixture]
     public class SudokuSolutionValidatorTest

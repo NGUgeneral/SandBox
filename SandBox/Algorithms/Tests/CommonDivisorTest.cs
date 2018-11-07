@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using SandBox.Algorithms;
-using SandBox.Utils;
 
-namespace SandBox.Test.Algorithms
+namespace SandBox.Algorithms.Tests
 {
     [TestFixture]
     public class CommonDivisorTest
