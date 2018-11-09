@@ -10,7 +10,7 @@ namespace SandBox.Tictactoe
 
             Console.WriteLine("\n");
             Console.WriteLine("Press any key to exit ...");
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }
