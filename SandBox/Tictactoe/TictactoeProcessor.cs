@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace SandBox.Tictactoe
 {
     class TictactoeProcessor
     {
         private readonly List<Cell> Field;
+        private readonly int Side;
 
-        public TictactoeProcessor()
+        public TictactoeProcessor(int side)
         {
-            Field = GenerateEmptyField(3, 3);
-            SetYWonField();
+            Side = side;
+            Field = GenerateEmptyField(side);
+            SetTieField();
             DrawField();
         }
 
@@ -21,14 +23,11 @@ namespace SandBox.Tictactoe
         public bool RegisterMove(int x, int y, CellOwner owner)
         {
             //Subtract 1 from inputs, since coordinates are zero based
-            var cell = Field.SingleOrDefault(c => c.ThisCell(x - 1, y - 1));
+            var cell = GetCell(x - 1, y - 1);
             if (cell == null)
-            {
-                Console.WriteLine("Invalid coordinate for a move");
                 return false;
-            }
 
-            if (cell.Owner > 0)
+            if ((int)cell.Owner > 1)
             {
                 Console.WriteLine("This cell is already occupied");
                 return false;
@@ -38,38 +37,46 @@ namespace SandBox.Tictactoe
             return true;
         }
 
+        private bool ValidateField()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
-        #region Field Draw and Generation
+        #region Field Draw, Cell Access and Generation
 
         private void DrawField()
         {
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < Side; j++)
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < Side; i++)
                 {
-                    var sym = Field[i + j * 3].Owner > 0 ? Field[i + j * 3].Owner.ToString() : " ";
+                    var sym = (int)Field[i + j * Side].Owner > 1 ? Field[i + j * Side].Owner.ToString() : " ";
                     Console.Write(sym);
-                    if (i < 2) Console.Write("|");
+                    if (i < Side - 1) Console.Write("|");
                 }
 
-                if (j < 2)
+                if (j < Side - 1)
                 {
                     Console.Write("\n");
-                    Console.WriteLine("-----");
+                    var divider = new StringBuilder();
+                    for (int i = 0; i < Side; i++)
+                        divider.Append("- ");
+                    Console.WriteLine(divider);
                 }
             }
             Console.Write("\n");
         }
 
-        private static List<Cell> GenerateEmptyField(int x, int y)
+        private static List<Cell> GenerateEmptyField(int side)
         {
             var field = new List<Cell>();
             var r = new Random();
 
-            for (int i = 0; i < y; i++)
+            for (int i = 0; i < side; i++)
             {
-                for (int j = 0; j < x; j++)
+                for (int j = 0; j < side; j++)
                 {
                     var cell = new Cell(j, i);
                     field.Add(cell);
@@ -79,20 +86,28 @@ namespace SandBox.Tictactoe
             return field;
         }
 
+        private Cell GetCell(int x, int y)
+        {
+            var cell = Field.FirstOrDefault(c => c.ThisCell(x, y));
+            if (cell == null) throw new Exception("Invalid coordinate");
+
+            return cell;
+        }
+
         #endregion
 
         #region Test Area
 
-        private List<Cell> GenerateRandomField(int width, int height)
+        private List<Cell> GenerateRandomField(int side)
         {
             var field = new List<Cell>();
             var r = new Random();
 
-            for (int i = 0; i < height; i++)
+            for (int i = 0; i < side; i++)
             {
-                for (int j = 0; j < width; j++)
+                for (int j = 0; j < side; j++)
                 {
-                    var owner = (CellOwner)r.Next(0, 3);
+                    var owner = (CellOwner)r.Next(0, Side);
                     var cell = new Cell(j, i)
                     {
                         Owner = owner
@@ -107,37 +122,41 @@ namespace SandBox.Tictactoe
 
         private void SetTieField()
         {
-            RegisterMove(1, 1, CellOwner.X);
-            RegisterMove(2, 1, CellOwner.O);
-            RegisterMove(3, 1, CellOwner.X);
-            RegisterMove(1, 2, CellOwner.O);
-            RegisterMove(2, 2, CellOwner.X);
-            RegisterMove(3, 2, CellOwner.X);
-            RegisterMove(1, 3, CellOwner.O);
-            RegisterMove(2, 3, CellOwner.X);
-            RegisterMove(3, 3, CellOwner.O);
+            var init = CellOwner.X;
+            var d = 0;
+            for (int y = 1; y < Side + 1; y++)
+            {
+                if (d == 1)
+                {
+                    init = init == CellOwner.X ? CellOwner.O : CellOwner.X;
+                    d = 0;
+                }   
+                else
+                {
+                    d++;
+                }
+
+                for (int x = 1; x < Side + 1; x++)
+                {
+                    var sym = x % 2 == 0 ? init : GetOpponentSym(init);
+                    RegisterMove(x, y, sym);
+                }
+            }
         }
+
+        private static CellOwner GetOpponentSym(CellOwner sym)
+            => sym == CellOwner.O ? CellOwner.X : CellOwner.O;
 
         private void SetXWonField()
         {
-            RegisterMove(1, 1, CellOwner.X);
-            RegisterMove(3, 1, CellOwner.O);
-            RegisterMove(3, 2, CellOwner.X);
-            RegisterMove(3, 3, CellOwner.O);
-            RegisterMove(1, 3, CellOwner.X);
-            RegisterMove(2, 3, CellOwner.O);
-            RegisterMove(1, 2, CellOwner.X);
+            for (int i = 1; i < Side + 1; i++)
+                RegisterMove(i, i, CellOwner.X);
         }
 
-        private void SetYWonField()
+        private void SetOWonField()
         {
-            RegisterMove(1, 1, CellOwner.O);
-            RegisterMove(3, 1, CellOwner.X);
-            RegisterMove(3, 2, CellOwner.O);
-            RegisterMove(3, 3, CellOwner.X);
-            RegisterMove(1, 3, CellOwner.O);
-            RegisterMove(2, 3, CellOwner.X);
-            RegisterMove(1, 2, CellOwner.O);
+            for (int i = 1; i < Side + 1; i++)
+                RegisterMove(i, i, CellOwner.O);
         }
 
         #endregion
@@ -170,9 +189,9 @@ namespace SandBox.Tictactoe
 
         public enum CellOwner
         {
-            None = 0,
-            X = 1,
-            O = 2
+            None = 1,
+            X = 2,
+            O = 3
         }
 
         #endregion
