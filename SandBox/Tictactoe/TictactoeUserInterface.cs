@@ -6,7 +6,7 @@ namespace SandBox.Tictactoe
     {
         public TictactoeUserInterface()
         {
-            new TictactoeProcessor(5);
+            TictactoeProcessor.StartGame(3);
 
             Console.WriteLine("\n");
             Console.WriteLine("Press any key to exit ...");
