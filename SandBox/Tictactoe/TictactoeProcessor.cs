@@ -10,6 +10,7 @@ namespace SandBox.Tictactoe
         private static CellOwner[,] Field;
         private static CellOwner Winner = CellOwner.None;
         private static CellOwner Player = CellOwner.None;
+        private static bool BotMode;
         private static int Side;
         private static Random r = new Random();
 
@@ -19,26 +20,25 @@ namespace SandBox.Tictactoe
             Field = GenerateEmptyField();
         }
 
+        #region Core
+
         public static void StartGame(int side)
         {
             new TictactoeProcessor(side);
+            Console.WriteLine("Wanna play with a bot? [y]");
+            BotMode = Console.ReadKey().Key == ConsoleKey.Y;
+
             Console.WriteLine("Enter coordinate for a move divided by coma. For example: 1,3 (which would be column 1 of row 3). After that - press enter.");
             Player = CellOwner.X;
-            for(int i = 0; i < Side*Side; i++)
+            for (int i = 0; i < Side * Side; i++)
             {
                 DrawField();
                 Console.WriteLine($"Player {Player} move.");
 
-                if (Player == CellOwner.X)
-                {   
-                    var coord = GetValidCoordinate();
-                    while (!RegisterMove(coord.Item1, coord.Item2, Player))
-                        coord = GetValidCoordinate();
-                }
+                if (Player == CellOwner.O && BotMode)
+                    MakeBotMove();
                 else
-                {
-                    MakeBotMove(CellOwner.O);
-                }
+                    MakePlayerMove();
 
                 ValidateField();
                 if (Winner != CellOwner.None)
@@ -51,28 +51,37 @@ namespace SandBox.Tictactoe
             Console.WriteLine($"\nWinner is: {winner}");
         }
 
+        private static void MakePlayerMove()
+        {
+            var coord = GetValidCoordinate();
+            while (!RegisterMove(coord.Item1, coord.Item2, Player))
+                coord = GetValidCoordinate();
+        }
+
+        #endregion
+
         #region Bot
 
-        private static void MakeBotMove(CellOwner player)
+        private static void MakeBotMove()
         {
             var emptyCells = GetEmptyCells();
 
-            var selfMove = GetWinningMove(player, emptyCells);
+            var selfMove = GetWinningMove(Player, emptyCells);
             if (selfMove.Item1 != -1)
             {
-                RegisterMove(selfMove.Item1 + 1, selfMove.Item2 + 1, player);
+                RegisterMove(selfMove.Item1 + 1, selfMove.Item2 + 1, Player);
                 return;
             }
 
-            var opponentMove = GetWinningMove(GetOpponentSym(player), emptyCells);
+            var opponentMove = GetWinningMove(GetOpponentSym(Player), emptyCells);
             if (opponentMove.Item1 != -1)
             {
-                RegisterMove(opponentMove.Item1 + 1, opponentMove.Item2 + 1, player);
+                RegisterMove(opponentMove.Item1 + 1, opponentMove.Item2 + 1, Player);
                 return;
             }
 
             var move = emptyCells[r.Next(0, emptyCells.Count)];
-            RegisterMove(move.Item1 + 1, move.Item2 + 1, player);
+            RegisterMove(move.Item1 + 1, move.Item2 + 1, Player);
         }
 
         private static (int, int) GetWinningMove(CellOwner owner, List<(int, int)> emptyCells)
@@ -256,86 +265,6 @@ namespace SandBox.Tictactoe
 
         private static CellOwner GetCellOwner(int x, int y)
             => x < 0 || x >= Side || y < 0 || y >= Side ? 0 : Field[x,y];
-
-        #endregion
-
-        #region Test Area
-
-        private CellOwner[,] GenerateRandomField()
-        {
-            var field = new CellOwner[Side, Side];
-
-            for (int y = 0; y < Side; y++)
-            {
-                for (int x = 0; x < Side; x++)
-                    field[x, y] = r.Next(1, 3) % 2 == 0 ? CellOwner.X : CellOwner.O;
-            }
-
-            return field;
-        }
-
-        private void SetTieField()
-        {
-            var init = CellOwner.X;
-            var i = 0;
-            for (int y = 1; y < Side + 1; y++)
-            {
-                if (i == 1)
-                {
-                    init = init == CellOwner.X ? CellOwner.O : CellOwner.X;
-                    i = 0;
-                }   
-                else
-                {
-                    i++;
-                }
-
-                for (int x = 1; x < Side + 1; x++)
-                {
-                    var sym = x % 2 == 0 ? init : GetOpponentSym(init);
-                    RegisterMove(x, y, sym);
-                }
-            }
-        }
-
-        
-
-        private void SetXWonLrDiagonalField()
-        {
-            for (int i = 1; i < Side + 1; i++)
-                RegisterMove(i, i, CellOwner.X);
-        }
-
-        private void SetXWonRlDiagonalField()
-        {
-            for (int i = 1; i < Side + 1; i++)
-                RegisterMove(Side + 1 - i, i, CellOwner.X);
-        }
-
-        private void SetXWonRowField()
-        {
-            for (int i = 1; i < Side + 1; i++)
-                RegisterMove(i, 1, CellOwner.X);
-        }
-
-        private void SetOWonColumnField()
-        {
-            for (int i = 1; i < Side + 1; i++)
-                RegisterMove(1, i, CellOwner.O);
-        }
-
-        private void SetOWonDiagonalField()
-        {
-            for (int i = 1; i < Side + 1; i++)
-                RegisterMove(i, i, CellOwner.O);
-        }
-
-        private void SetVShape()
-        {
-            RegisterMove(1, 1, CellOwner.O);
-            RegisterMove(2, 2, CellOwner.O);
-            RegisterMove(3, 1, CellOwner.O);
-        }
 
         #endregion
     }
