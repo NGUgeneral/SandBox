@@ -1,10 +1,12 @@
-﻿namespace SandBox
+﻿using SandBox.DataContractSerialize;
+
+namespace SandBox
 {
     class Program
     {
         static void Main(string[] args)
         {
-            new ConsoleService();
+            new DataContractSerializeInterface();
         }
     }
 }
