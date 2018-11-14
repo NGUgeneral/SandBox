@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandBox", "SandBox\SandBox.csproj", "{6F56E9AD-F70A-45FB-A6F1-8C53010B5E48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Match3", "Match3\Match3.csproj", "{33F49FF8-4520-4C08-8C90-57F3AF490BC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodewarsKatas", "CodewarsKatas\CodewarsKatas.csproj", "{DC84AAEF-03A4-4C74-A103-C7C40E0FB433}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6F56E9AD-F70A-45FB-A6F1-8C53010B5E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F56E9AD-F70A-45FB-A6F1-8C53010B5E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F56E9AD-F70A-45FB-A6F1-8C53010B5E48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33F49FF8-4520-4C08-8C90-57F3AF490BC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33F49FF8-4520-4C08-8C90-57F3AF490BC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33F49FF8-4520-4C08-8C90-57F3AF490BC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33F49FF8-4520-4C08-8C90-57F3AF490BC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC84AAEF-03A4-4C74-A103-C7C40E0FB433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC84AAEF-03A4-4C74-A103-C7C40E0FB433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC84AAEF-03A4-4C74-A103-C7C40E0FB433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC84AAEF-03A4-4C74-A103-C7C40E0FB433}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

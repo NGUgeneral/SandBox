@@ -2,8 +2,13 @@
 packages/
 SandBox/obj
 SandBox/bin
+Match3/obj
+Match3/bin
+CodewarsKatas/obj
+CodewarsKatas/bin
 _ReSharper.Caches/
 *.exe
 *.pdb
 *.cache
 *.dll
+SandBox/SandBox.csproj.user

@@ -1,19 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NUnit.3.10.1\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6F56E9AD-F70A-45FB-A6F1-8C53010B5E48}</ProjectGuid>
+    <ProjectGuid>{DC84AAEF-03A4-4C74-A103-C7C40E0FB433}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SandBox</RootNamespace>
-    <AssemblyName>SandBox</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <RootNamespace>CodewarsKatas</RootNamespace>
+    <AssemblyName>CodewarsKatas</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,16 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,33 +46,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithms\CommonDivisor.cs" />
-    <Compile Include="Algorithms\Enums.cs" />
-    <Compile Include="TreeDataStructure\BinaryTree.cs" />
-    <Compile Include="TreeDataStructure\NodeInterface.cs" />
-    <Compile Include="ConsoleService.cs" />
-    <Compile Include="Algorithms\MathOperations\Factorization.cs" />
+    <Compile Include="CodewarsKatas\Kyu4\SudokuSolutionValidator.cs" />
+    <Compile Include="CodewarsKatas\Kyu4\SumStringsAsNumbers.cs" />
+    <Compile Include="CodewarsKatas\Kyu5\Int32ToIPv4.cs" />
+    <Compile Include="CodewarsKatas\Kyu6\ReplaceWithAlphabetPosition.cs" />
+    <Compile Include="CodewarsKatas\Tests\Kyu4\NextBiggerNumberWithSameDigitsTest.cs" />
+    <Compile Include="CodewarsKatas\Tests\Kyu4\SudokuSolutionValidatorTest.cs" />
+    <Compile Include="CodewarsKatas\Tests\Kyu4\SumStringsAsNumbersTest.cs" />
+    <Compile Include="CodewarsKatas\Tests\Kyu5\Int32ToIPv4Test.cs" />
+    <Compile Include="CodewarsKatas\Tests\Kyu6\ReplaceWithAlphabetPositionTest.cs" />
+    <Compile Include="CodewarsKatas\WIP\NextBiggerNumberWithSameDigits.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Algorithms\Sort.cs" />
-    <Compile Include="Algorithms\Tests\CommonDivisorTest.cs" />
-    <Compile Include="Algorithms\Tests\SortTest.cs" />
-    <Compile Include="Utils\Helpers.cs" />
-    <Compile Include="Utils\PersistantSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TODO.txt" />
+    <Folder Include="CodewarsKatas\Kyu3\" />
+    <Folder Include="CodewarsKatas\Kyu7\" />
+    <Folder Include="CodewarsKatas\Tests\Kyu3\" />
+    <Folder Include="CodewarsKatas\Tests\Kyu7\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.10.1\build\NUnit.props'))" />
-  </Target>
 </Project>

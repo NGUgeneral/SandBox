@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SandBox.Math;
+using SandBox.Algorithms.MathOperations;
 
 namespace SandBox.Algorithms
 {

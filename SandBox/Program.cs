@@ -1,5 +1,4 @@
-﻿using SandBox.Algorithms.TreeDataStructure;
-using SandBox.DataContractSerialize;
+﻿using SandBox.TreeDataStructure;
 
 namespace SandBox
 {
@@ -7,8 +6,7 @@ namespace SandBox
     {
         static void Main(string[] args)
         {
-            //new NodeInterface();
-            new DataContractSerializeInterface();
+            new NodeInterface();
         }
     }
 }
