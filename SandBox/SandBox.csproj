@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="Algorithms\CommonDivisor.cs" />
     <Compile Include="Algorithms\Enums.cs" />
+    <Compile Include="Algorithms\TreeDataStructure\BinaryNode.cs" />
+    <Compile Include="Algorithms\TreeDataStructure\NodeInterface.cs" />
     <Compile Include="CodewarsKatas\Kyu4\SumStringsAsNumbers.cs" />
     <Compile Include="CodewarsKatas\Tests\Kyu4\SumStringsAsNumbersTest.cs" />
     <Compile Include="CodewarsKatas\WIP\NextBiggerNumberWithSameDigits.cs" />
