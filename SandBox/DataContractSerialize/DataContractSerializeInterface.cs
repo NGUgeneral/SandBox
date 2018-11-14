@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using SandBox.Algorithms.TreeDataStructure;
 
 namespace SandBox.DataContractSerialize
 {
@@ -12,27 +13,18 @@ namespace SandBox.DataContractSerialize
         {
             var save = false;
             
-            List<Dummy> dummies;
+            BinaryTree<int> tree;
             if (save)
             {
-                int dummyCount = 100;
-                dummies = new List<Dummy>();
-                for (int i = 0; i < dummyCount; i++)
-                {
-                    var dummy = Dummy.GenerateDummy();
-                    foreach (var bummy in dummy.Bummies)
-                        bummy.Parent = dummy;
+                tree = NodeInterface.GenerateBinaryTree();
 
-                    dummies.Add(dummy);
-                }
-
-                Save("dummies", dummies);
-                Console.WriteLine("Dummy saved successfully");
+                Save("tree", tree);
+                Console.WriteLine("Tree saved successfully");
             }
             else
             {
-                dummies = Load<List<Dummy>>("dummies");
-                Console.WriteLine("Dummy loaded successfully");
+                tree = Load<BinaryTree<int>>("tree");
+                Console.WriteLine("Tree loaded successfully");
             }
 
             Console.WriteLine("\nPress any key to exit ...");
