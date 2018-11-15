@@ -64,6 +64,7 @@
     <Compile Include="Algorithms\Sort.cs" />
     <Compile Include="Algorithms\Tests\CommonDivisorTest.cs" />
     <Compile Include="Algorithms\Tests\SortTest.cs" />
+    <Compile Include="TreeDataStructure\Tree.cs" />
     <Compile Include="Utils\Helpers.cs" />
     <Compile Include="Utils\PersistantSerializer.cs" />
   </ItemGroup>

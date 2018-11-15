@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using SandBox.Utils;
 
 namespace SandBox.TreeDataStructure
@@ -7,21 +8,22 @@ namespace SandBox.TreeDataStructure
     {
         public NodeInterface()
         {
-            var save = false;
+            var save = true;
 
-            BinaryTree<int> tree;
+            Tree<int> tree;
             if (save)
             {
-                tree = GenerateBinaryTree(100);
-
-                PersistantSerializer<BinaryTree<int>>.Save("tree", tree);
+                tree = GenerateTree(100);
+                PersistantSerializer<Tree<int>>.Save("tree", tree);
                 Console.WriteLine("Tree saved successfully");
             }
             else
             {
-                tree = PersistantSerializer<BinaryTree<int>>.Load("tree");
+                tree = PersistantSerializer<Tree<int>>.Load("tree");
                 Console.WriteLine("Tree loaded successfully");
             }
+
+            Console.WriteLine($"Total number of leaves: {tree.GetAllLeaves().Count()}");
 
             Console.WriteLine("\nPress any key to exit ...");
             Console.ReadKey();
@@ -29,14 +31,28 @@ namespace SandBox.TreeDataStructure
 
         #region TestArea
 
-        public static BinaryTree<int> GenerateBinaryTree(int limit)
+        public static OrderedBinaryTree<int> GenerateBinaryTree(int limit)
         {
             var r = new Random();
-            var tree = new BinaryTree<int>(0);
+            var tree = new OrderedBinaryTree<int>(0);
 
             while (limit > 0)
             {
                 tree.InsertValue(r.Next(-100, 100));
+                limit--;
+            }
+
+            return tree;
+        }
+
+        public static Tree<int> GenerateTree(int limit)
+        {
+            var r = new Random();
+            var tree = new Tree<int>(0);
+
+            while (limit > 0)
+            {
+                tree.InsertValueTest(r.Next(-100, 100));
                 limit--;
             }
 

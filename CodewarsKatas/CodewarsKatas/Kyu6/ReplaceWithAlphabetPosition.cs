@@ -19,7 +19,7 @@ namespace CodewarsKatas.CodewarsKatas.Kyu6
             return result.ToString();
         }
 
-        private static Dictionary<char, int> Alphabet = new Dictionary<char, int>()
+        private static readonly Dictionary<char, int> Alphabet = new Dictionary<char, int>()
         {
             {'a', 1 },
             {'b', 2 },
