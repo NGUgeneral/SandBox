@@ -1,4 +1,9 @@
 ﻿1.1.	Optimize Tictactoe algorithm to hadle 3 in a row instead of whole line, for fields side > 3;
 1.2.	Evolve Tictactoe into a Match3;
 
-2.		Implement ShellSort;
+2.1.	Implement ShellSort;
+2.2.	Reimplement the heap sort, using the tree data structure;
+
+3.1.	Write all trees independent, in the process determine similar functionality and based on it - made a unified interfface;
+3.2.	OrderedBinaryTree structure inserting well just a single node, but does not if inserting a sub tree;
+3.3.	Introduce a unified interface for tree (so after - tree, unsorted binary tree, sorted binary tree and red/black tree can be introduced);

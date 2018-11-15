@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace SandBox.TreeDataStructure
 {
     [DataContract]
-    public class BinaryTree<T> where T : IComparable
+    public class OrderedBinaryTree<T> where T : IComparable
     {
         [DataMember]
         private Node Root { get; set; }
@@ -13,12 +13,12 @@ namespace SandBox.TreeDataStructure
         private IEnumerable<Node> GetAllLeaves
             => Node.GetAllLeaves(Root);
 
-        private BinaryTree()
+        private OrderedBinaryTree()
         {
             
         }
 
-        public BinaryTree(T value)
+        public OrderedBinaryTree(T value)
         {
             Root = new Node
             {
@@ -46,7 +46,14 @@ namespace SandBox.TreeDataStructure
                 }
                 else
                 {
-                    InsertNodeRoutine(parent.RightChild, node);
+                    if (parent.RightChild.Value.CompareTo(node.Value) > 0)
+                    {
+                        parent.InsertRightChild(node);
+                    }
+                    else
+                    {
+                        InsertNodeRoutine(parent.RightChild, node);
+                    }
                 }
             }
             else
@@ -57,7 +64,14 @@ namespace SandBox.TreeDataStructure
                 }
                 else
                 {
-                    InsertNodeRoutine(parent.LeftChild, node);
+                    if (parent.LeftChild.Value.CompareTo(node.Value) > 0)
+                    {
+                        parent.InsertLeftChild(node);
+                    }
+                    else
+                    {
+                        InsertNodeRoutine(parent.LeftChild, node);
+                    }
                 }
             }
         }
