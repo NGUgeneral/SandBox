@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodewarsKatas\WIP\Kyu3\TotalAreaCoveredByRectangles.cs" />
     <Compile Include="CodewarsKatas\Kyu4\SudokuSolutionValidator.cs" />
     <Compile Include="CodewarsKatas\Kyu4\SumStringsAsNumbers.cs" />
     <Compile Include="CodewarsKatas\Kyu5\GreedIsGood.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="CodewarsKatas\Kyu5\NumberOfTrailingZeros.cs" />
     <Compile Include="CodewarsKatas\Kyu6\PlusOneArray.cs" />
     <Compile Include="CodewarsKatas\Kyu6\ReplaceWithAlphabetPosition.cs" />
+    <Compile Include="CodewarsKatas\Tests\Kyu3\TotalAreaCoveredByRectanglesTest.cs" />
     <Compile Include="CodewarsKatas\Tests\Kyu4\NextBiggerNumberWithSameDigitsTest.cs" />
     <Compile Include="CodewarsKatas\Tests\Kyu4\SudokuSolutionValidatorTest.cs" />
     <Compile Include="CodewarsKatas\Tests\Kyu4\SumStringsAsNumbersTest.cs" />
@@ -76,7 +78,6 @@
   <ItemGroup>
     <Folder Include="CodewarsKatas\Kyu3\" />
     <Folder Include="CodewarsKatas\Kyu7\" />
-    <Folder Include="CodewarsKatas\Tests\Kyu3\" />
     <Folder Include="CodewarsKatas\Tests\Kyu7\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
