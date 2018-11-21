@@ -2,11 +2,11 @@
 
 namespace SandBox
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            new NodeInterface();
-        }
-    }
+	internal class Program
+	{
+		private static void Main(string[] args)
+		{
+			new NodeInterface();
+		}
+	}
 }

@@ -4,74 +4,75 @@ using System.Linq;
 //https://www.codewars.com/kata/sudoku-solution-validator/train/csharp
 namespace CodewarsKatas.CodewarsKatas.Kyu4
 {
-    public class SudokuSolutionValidator
-    {
-        private static List<int> correctSample = new List<int>{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        public static bool ValidateSolution(int[][] board)
-        {
-            if (!board.Any()) return false;
-            if (board.Length != board[0].Length) return false;
+	public class SudokuSolutionValidator
+	{
+		private static List<int> correctSample = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-            for (int i = 0; i < board[0].Length; i++)
-                if (!ValidateRow(board, i) || !ValidateColumn(board, i)) return false;
+		public static bool ValidateSolution(int[][] board)
+		{
+			if (!board.Any()) return false;
+			if (board.Length != board[0].Length) return false;
 
-            for (int y = 0; y < 9; y += 3)
-            {
-                for (int x = 0; x < 9; x += 3)
-                    if (!ValidateSquare(board, y, x))
-                        return false;
-            }
+			for (int i = 0; i < board[0].Length; i++)
+				if (!ValidateRow(board, i) || !ValidateColumn(board, i)) return false;
 
-            return true;
-        }
+			for (int y = 0; y < 9; y += 3)
+			{
+				for (int x = 0; x < 9; x += 3)
+					if (!ValidateSquare(board, y, x))
+						return false;
+			}
 
-        private static bool ValidateRow(int[][] board, int row)
-        {
-            var sequence = new List<int>();
-            sequence.AddRange(correctSample);
+			return true;
+		}
 
-            foreach (var num in board[row])
-                if(!sequence.Contains(num))
-                    return false;
+		private static bool ValidateRow(int[][] board, int row)
+		{
+			var sequence = new List<int>();
+			sequence.AddRange(correctSample);
 
-            return true;
-        }
+			foreach (var num in board[row])
+				if (!sequence.Contains(num))
+					return false;
 
-        private static bool ValidateColumn(int[][] board, int column)
-        {
-            var sequence = new List<int>();
-            sequence.AddRange(correctSample);
+			return true;
+		}
 
-            var columnSequence = new List<int>();
+		private static bool ValidateColumn(int[][] board, int column)
+		{
+			var sequence = new List<int>();
+			sequence.AddRange(correctSample);
 
-            foreach (var row in board)
-                columnSequence.Add(row[column]);
+			var columnSequence = new List<int>();
 
-            foreach (var num in columnSequence)
-                if (!sequence.Contains(num))
-                    return false;
+			foreach (var row in board)
+				columnSequence.Add(row[column]);
 
-            return true;
-        }
+			foreach (var num in columnSequence)
+				if (!sequence.Contains(num))
+					return false;
 
-        private static bool ValidateSquare(int[][] board, int row, int column)
-        {
-            var sequence = new List<int>();
-            sequence.AddRange(correctSample);
+			return true;
+		}
 
-            var squareSequence = new List<int>();
+		private static bool ValidateSquare(int[][] board, int row, int column)
+		{
+			var sequence = new List<int>();
+			sequence.AddRange(correctSample);
 
-            for (int y = row; y < row + 3; y++)
-            {
-                for (int x = column; x < column + 3; x++)
-                    squareSequence.Add(board[y][x]);
-            }
+			var squareSequence = new List<int>();
 
-            foreach (var num in squareSequence)
-                if (!sequence.Contains(num))
-                    return false;
+			for (int y = row; y < row + 3; y++)
+			{
+				for (int x = column; x < column + 3; x++)
+					squareSequence.Add(board[y][x]);
+			}
 
-            return true;
-        }
-    }
+			foreach (var num in squareSequence)
+				if (!sequence.Contains(num))
+					return false;
+
+			return true;
+		}
+	}
 }
