@@ -1,12 +1,10 @@
-﻿using SandBox.TreeDataStructure;
-
-namespace SandBox
+﻿namespace SandBox
 {
 	internal class Program
 	{
 		private static void Main(string[] args)
 		{
-			new NodeInterface();
+			new ConsoleService();
 		}
 	}
 }
