@@ -51,7 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodewarsKatas\Kyu4\ConnectFour.cs" />
+    <Compile Include="CodewarsKatas\Kyu6\WhoLikesIt.cs" />
     <Compile Include="CodewarsKatas\Tests\Kyu4\ConnectFourTest.cs" />
+    <Compile Include="CodewarsKatas\Tests\Kyu6\WhoLikesItTest.cs" />
     <Compile Include="CodewarsKatas\WIP\Kyu3\TotalAreaCoveredByRectangles.cs" />
     <Compile Include="CodewarsKatas\Kyu4\SudokuSolutionValidator.cs" />
     <Compile Include="CodewarsKatas\Kyu4\SumStringsAsNumbers.cs" />
