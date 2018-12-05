@@ -1,76 +1,69 @@
-﻿using CodewarsKatas.CodewarsKatas.WIP.Kyu3;
+﻿using System.Linq;
+using System.Text;
+using CodewarsKatas.CodewarsKatas.WIP.Kyu3;
 using NUnit.Framework;
-using System.Linq;
 
 namespace CodewarsKatas.CodewarsKatas.Tests.Kyu3
 {
 	[TestFixture]
 	internal class TotalAreaCoveredByRectanglesTest
 	{
-		[Test]
-		public void ZeroRectangles()
-		{
-			Assert.AreEqual(0, TotalAreaCoveredByRectangles.Calculate(Enumerable.Empty<int[]>()));
-		}
+    [Test]
+	  public void TestCase1_SimpleIntersection()
+	  {
+	    int[][] rectangles = { new[] { 1, 1, 3, 3 }, new[] { 2, 2, 4, 4 } };
+	    Assert.AreEqual(7, TotalAreaCoveredByRectangles.Run(rectangles));
+	  }
 
-		[Test]
-		public void OneRectangle()
-		{
-			Assert.AreEqual(1, TotalAreaCoveredByRectangles.Calculate(new[] { new[] { 0, 0, 1, 1 } }));
-		}
+	  [Test]
+	  public void TestCase2_NoIntersection()
+	  {
+	    int[][] rectangles = { new[] { 1, 2, 4, 5 }, new[] { 4, 3, 9, 4 }, new [] { 10, 2, 11, 5 } };
+	    Assert.AreEqual(17, TotalAreaCoveredByRectangles.Run(rectangles));
+	  }
+	  [Test]
+	  public void TestCase3_ComplexIntersection1()
+	  {
+	    int[][] rectangles = { new[] { 2, 2, 4, 4 }, new[] { 2, 3, 4, 5 }, new [] { 3, 3, 5, 5 } };
+	    Assert.AreEqual(8, TotalAreaCoveredByRectangles.Run(rectangles));
+	  }
+	  [Test]
+	  public void TestCase4_ComplexIntersection2()
+	  {
+	    int[][] rectangles = { new[] { 1, 1, 6, 6 }, new[] { 2, 2, 5, 5 }, new [] { 3, 3, 4, 7 } };
+	    Assert.AreEqual(26, TotalAreaCoveredByRectangles.Run(rectangles));
+	  }
+  }
 
-		[Test]
-		public void OneRectangleV2()
-		{
-			Assert.AreEqual(22, TotalAreaCoveredByRectangles.Calculate(new[] { new[] { 0, 4, 11, 6 } }));
-		}
+  [TestFixture]
+  internal class CalculateSingleRectangleAreaTest
+  {
+    [TestCase(4, new[]{ 1, 1, 3, 3 })]
+    [TestCase(25, new[] { 0, 1, 5, 6 })]
+    public void RunTest(long expected, int[] rectangle)
+    {
+      Assert.AreEqual(expected, TotalAreaCoveredByRectangles.GetRectangleArea(rectangle));
+    }
+  }
 
-		[Test]
-		public void TwoRectangles()
-		{
-			Assert.AreEqual(2, TotalAreaCoveredByRectangles.Calculate(new[] { new[] { 0, 0, 1, 1 }, new[] { 1, 1, 2, 2 } }));
-		}
+  [TestFixture]
+  internal class CutOutRectangleTest
+  {
+    [TestCase("0,0,2,4;2,0,3,3;", new[]{ 0, 0, 3, 4 }, new[] { 2, 3, 6, 5 })]
+    [TestCase("0,0,1,2;1,0,2,1;", new[]{ 0, 0, 2, 2 }, new[] { 1, 1, 3, 3 })]
+    public void RunTest(string expected, int[] rectangle, int[] blade)
+    {
+      var result = new StringBuilder();
+      var split = TotalAreaCoveredByRectangles.CutOutRectangle(rectangle, blade);
+      foreach (var r in split)
+      {
+        foreach (var i in r)
+          result.Append(i);
 
-		[Test]
-		public void TwoRectanglesV2()
-		{
-			Assert.AreEqual(4, TotalAreaCoveredByRectangles.Calculate(new[] { new[] { 0, 0, 1, 1 }, new[] { 0, 0, 2, 2 } }));
-		}
+        result.Append(';');
+      }
 
-		[Test]
-		public void ThreeRectangles()
-		{
-			Assert.AreEqual(36, TotalAreaCoveredByRectangles.Calculate(new[] { new[] { 3, 3, 8, 5 }, new[] { 6, 3, 8, 9 }, new[] { 11, 6, 14, 12 } }));
-		}
-
-		[Test]
-		public void CustomComplexRectangles()
-		{
-			Assert.AreEqual(26, TotalAreaCoveredByRectangles.Calculate(new[] { new[] { 0, 0, 5, 5 }, new[] { 1, 1, 4, 4 }, new[] { 2, 2, 3, 6 } }));
-		}
-
-		//[Test]
-		//[TestCase(new[]{0,0,0,0}, 0)]
-		//[TestCase(new[]{0,0,1,1}, 1)]
-		//[TestCase(new[]{0,0,2,2}, 4)]
-		//[TestCase(new[]{0,0,2,1}, 2)]
-
-		//public void CalculateRectangleAreaTest(int[] rectangle, long expected)
-		//{
-		//    Assert.AreEqual(expected, TotalAreaCoveredByRectangles.CalculateRectangleArea(rectangle));
-		//}
-
-		//[Test]
-		//[TestCase(new[] { 0, 0, 1, 1 }, new[] { 2, 2, 3, 3 }, null)]
-		//[TestCase(new[] { 2, 2, 3, 3 }, new[] { 2, 2, 4, 4 }, new[] { 2, 2, 3, 3 })]
-		//[TestCase(new[] { 6, 0, 8, 4 }, new[] { 7, 1, 11, 3 }, new[] { 7, 1, 8, 3 })]
-		//[TestCase(new[] { 2, 1, 4, 5 }, new[] { 1, 2, 5, 4 }, new[] { 2, 2, 4, 4 })]
-		//[TestCase(new[] { 0, 0, 2, 2 }, new[] { 1, 1, 3, 3 }, new[] { 1, 1, 2, 2 })]
-		//[TestCase(new[] { 0, 1, 2, 3 }, new[] { 1, 0, 3, 2 }, new[] { 1, 1, 2, 2 })]
-
-		//public void GetIntersectionRectangleTest(int[] r1, int[] r2, int[] expected)
-		//{
-		//    Assert.AreEqual(expected, TotalAreaCoveredByRectangles.GetIntersectionRectangle(r1, r2));
-		//}
-	}
+      Assert.AreEqual(expected, result.ToString());
+    }
+  } 
 }
