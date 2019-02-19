@@ -40,23 +40,26 @@
 			{
 				Root = null;
 			}
-
-			var previous = focus;
-			focus = previous.Next;
-
-			while (focus != null)
+			else
 			{
-				if (focus.Equals(node))
-				{
-					previous.LinkTo(node.Next);
-					node.Unlink();
-					node.Dispose();
-					break;
-				}
-				
-				previous = focus;
+				var previous = focus;
 				focus = previous.Next;
+
+				while (focus != null)
+				{
+					if (focus.Equals(node))
+					{
+						previous.LinkTo(node.Next);
+						break;
+					}
+				
+					previous = focus;
+					focus = previous.Next;
+				}
 			}
+
+			node.Unlink();
+			node.Dispose();
 		}
 	}
 }
