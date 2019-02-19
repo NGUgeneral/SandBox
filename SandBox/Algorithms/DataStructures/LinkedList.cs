@@ -1,6 +1,9 @@
-﻿namespace SandBox.Algorithms.DataStructures
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace SandBox.Algorithms.DataStructures
 {
-	public class LinkedList<T>
+	public class LinkedList<T> : IEnumerable<T>
 	{
 		public EnumerableNode<T> Root { get; set; }
 		public bool Any => 
@@ -61,5 +64,19 @@
 			node.Unlink();
 			node.Dispose();
 		}
+
+		#region IEnumerable Implementation
+
+		public IEnumerator<T> GetEnumerator()
+		{
+			throw new System.NotImplementedException();
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			throw new System.NotImplementedException();
+		}
+
+		#endregion
 	}
 }

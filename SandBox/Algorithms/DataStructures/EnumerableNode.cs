@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
 namespace SandBox.Algorithms.DataStructures
 {
-	public class EnumerableNode<T> : IDisposable
+	public class EnumerableNode<T> : IDisposable, IEnumerator<T>
 	{
 		public T Value { get; }
 		public EnumerableNode<T> Next { get; private set; }
@@ -53,6 +55,24 @@ namespace SandBox.Algorithms.DataStructures
       
 			_disposed = true;
 		}
+
+		public bool MoveNext()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Reset()
+		{
+			throw new NotImplementedException();
+		}
+
+		#endregion
+
+		#region IEnumerator Implementation
+
+		public T Current => throw new NotImplementedException();
+
+		object IEnumerator.Current => throw new NotImplementedException();
 
 		#endregion
 	}
