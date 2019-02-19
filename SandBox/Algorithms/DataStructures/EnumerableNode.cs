@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-namespace SandBox.DataStructure
+namespace SandBox.Algorithms.DataStructures
 {
 	public class EnumerableNode<T> : IDisposable
 	{
@@ -28,7 +28,7 @@ namespace SandBox.DataStructure
 		#region IDisposable Implementation
 
 		// Flag: Has Dispose already been called?
-		bool disposed = false;
+		private bool _disposed;
 		// Instantiate a SafeHandle instance.
 		SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
 
@@ -42,7 +42,7 @@ namespace SandBox.DataStructure
 		// Protected implementation of Dispose pattern.
 		protected virtual void Dispose(bool disposing)
 		{
-			if (disposed)
+			if (_disposed)
 				return; 
       
 			if (disposing) {
@@ -51,7 +51,7 @@ namespace SandBox.DataStructure
 				//
 			}
       
-			disposed = true;
+			_disposed = true;
 		}
 
 		#endregion

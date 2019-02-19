@@ -1,4 +1,4 @@
-﻿namespace SandBox.DataStructure
+﻿namespace SandBox.Algorithms.DataStructures
 {
 	public class LinkedList<T>
 	{
@@ -9,7 +9,7 @@
 		public EnumerableNode<T> Head => 
 			Any ? GetHead(Root) : Root;
 
-		private EnumerableNode<T> GetHead(EnumerableNode<T> node)
+		private static EnumerableNode<T> GetHead(EnumerableNode<T> node)
 		{
 			return node.HasNext ? GetHead(node.Next) : node;
 		}
