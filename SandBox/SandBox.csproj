@@ -55,7 +55,8 @@
   <ItemGroup>
     <Compile Include="Algorithms\CommonDivisor.cs" />
     <Compile Include="Algorithms\Enums.cs" />
-    <Compile Include="DataStructures\Tree.cs" />
+    <Compile Include="DataStructure\EnumerableNode.cs" />
+    <Compile Include="DataStructure\LinkedList.cs" />
     <Compile Include="TreeDataStructure\OrderedBinaryTree.cs" />
     <Compile Include="TreeDataStructure\NodeInterface.cs" />
     <Compile Include="ConsoleService.cs" />
