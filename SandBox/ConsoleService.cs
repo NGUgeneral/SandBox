@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Numerics;
+using SandBox.Stuff;
 
 namespace SandBox
 {
@@ -7,6 +7,11 @@ namespace SandBox
 	{
 		public ConsoleService()
 		{
+			//var bot = new TelegramBot();
+			//bot.Start();
+
+			var tournamentManager = new TournamentManager();
+			tournamentManager.Start(8, 8);
 
 			Console.WriteLine("\nPress any key to exit ...");
 			Console.ReadKey();
